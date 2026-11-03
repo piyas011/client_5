@@ -1,23 +1,16 @@
-import Link from "next/link";
+import React, { Suspense } from "react";
 
 const UserDetailsPage = async ({ params }) => {
   const { userID } = await params;
-
-  const res = await fetch(`http://localhost:5000/users/${userID}`);
-  const user = await res.json();
-
   return (
-    <div className="p-5">
-      <div className="p-2">
-        <Link className="p-2 border rounded-[10px]" href="/users">
-          Back
-        </Link>
-      </div>
+    <div>
+      <h1>User Details Page</h1>
+
       <div>
-        User Details Page : {userID}
-        <p>User name : {user.name}</p>
-        <p>User Email : {user.email}</p>
-        <p>User Number : {user.phone}</p>
+        <Suspense fallback={<p>loading...</p>}>
+          <p>userID : {userID}</p>
+        </Suspense>
+        <p>Name : {}</p>
       </div>
     </div>
   );
