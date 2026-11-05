@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { use } from "react";
+import DeleteUser from "./DeleteUser";
 
 const AllUsers = ({ usersPromise }) => {
   const users = use(usersPromise());
@@ -15,20 +16,19 @@ const AllUsers = ({ usersPromise }) => {
         {users.map((user, index) => (
           <div className="p-2 border rounded-[10px]" key={index}>
             <div>
+              <p>User Id : {user?._id}</p>
               <p>User Name : {user?.name}</p>
               <p>User Email : {user?.email}</p>
               <p>User Mobile : {user?.number}</p>
             </div>
             <div className="flex justify-between items-center ">
-              <Link href={`users/${user._id}`}>
+              <Link href={`/users/${user._id}`}>
                 <button className="p-2 border rounded-[10px]">
                   View Details
                 </button>
               </Link>
-              <button className="p-2 border rounded-[10px]">Edit</button>
-              <button className="p-2 border rounded-[10px] bg-red-300">
-                Delete
-              </button>
+              <Link href="/users">Edit User</Link>
+              <DeleteUser user={user} />
             </div>
           </div>
         ))}
